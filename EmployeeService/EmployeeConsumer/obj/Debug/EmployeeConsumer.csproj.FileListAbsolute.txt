@@ -1,0 +1,6 @@
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\bin\Debug\EmployeeConsumer.exe.config
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\bin\Debug\EmployeeConsumer.exe
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\bin\Debug\EmployeeConsumer.pdb
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\obj\Debug\EmployeeConsumer.csprojResolveAssemblyReference.cache
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\obj\Debug\EmployeeConsumer.exe
+D:\WCF-Assignment\EmployeeService\EmployeeConsumer\obj\Debug\EmployeeConsumer.pdb

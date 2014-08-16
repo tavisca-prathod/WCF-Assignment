@@ -1,0 +1,8 @@
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.dll.config
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.dll
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.pdb
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeService.dll
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeService.pdb
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.csprojResolveAssemblyReference.cache
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.dll
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.pdb

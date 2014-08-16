@@ -1,0 +1,5 @@
+D:\WCF-Assignment\EmployeeService\Consumer\bin\Debug\Consumer.exe.config
+D:\WCF-Assignment\EmployeeService\Consumer\bin\Debug\Consumer.exe
+D:\WCF-Assignment\EmployeeService\Consumer\bin\Debug\Consumer.pdb
+D:\WCF-Assignment\EmployeeService\Consumer\obj\Debug\Consumer.exe
+D:\WCF-Assignment\EmployeeService\Consumer\obj\Debug\Consumer.pdb
