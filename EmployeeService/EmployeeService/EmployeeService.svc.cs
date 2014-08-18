@@ -13,11 +13,22 @@ namespace EmployeeService
     public class EmployeeOperationService : IAddEmployeeService, IGetEmployeeService
     {
         private static List<Employee> _employeeList = new List<Employee>();
+        private static List<Remarks> _remarksList = new List<Remarks>();
 
-        public void AddRemarks(int employeeId, string remark)
+        public void AddRemarks(int employeeId, string remarkText)
         {
-
-            Console.WriteLine("Added the remark");
+            if (IsEmployeeIdExists(employeeId))
+            {
+                Remarks remark = new Remarks();
+                remark.DateTime = DateTime.UtcNow;
+                remark.EmployeeId = employeeId;
+                remark.Remark = remarkText;
+                _remarksList.Add(remark);
+            }
+            else
+            {
+                throw new Exception("The employee with the given id does not exists");
+            }
         }
 
         public void CreateEmployee(int id, string name)
@@ -26,7 +37,7 @@ namespace EmployeeService
             if (!IsEmployeeIdExists(id))
             {
                 employee = new Employee();
-                employee.id = id;
+                employee.Id = id;
                 employee.Name = name;
                 _employeeList.Add(employee);
                 Console.WriteLine("Created the employee");
@@ -39,29 +50,64 @@ namespace EmployeeService
 
         public Employee GetEmployeeDetails(int employeeId)
         {
-            Console.WriteLine("Got Employe for your employee id");
-            return null;
+            if (IsEmployeeIdExists(employeeId))
+            {
+                return _employeeList.First(emp => emp.Id == employeeId);
+            }
+            else
+            {
+                throw new Exception("The employee with the given id does not exists");
+            }
         }
 
         public Employee GetEmployeeDetails(string employeeName)
         {
-            Console.WriteLine("Got Employe for your employee by name");
-            return null;
+            if (IsEmployeeNameExists(employeeName))
+            {
+                return _employeeList.First(emp => emp.Name == employeeName);
+            }
+            else
+            {
+                throw new Exception("The employee with the given name does not exists");
+            }
         }
 
         public List<Employee> GetAllEmployees()
         {
-            Console.WriteLine("Got All of your employees");
-            return null;
+            return _employeeList;
         }
 
         private bool IsEmployeeIdExists(int employeeId)
         {
-            return _employeeList.Any(employee => employee.id == employeeId);
+            return _employeeList.Any(employee => employee.Id == employeeId);
         }
 
-        public static int GetEmployeeCount() {
+        private bool IsEmployeeNameExists(string employeeName)
+        {
+            return _employeeList.Any(employee => employee.Name == employeeName);
+        }
+
+        public static int GetEmployeeCount()
+        {
             return _employeeList.Count;
         }
+
+        public static void ClearEmployeeList()
+        {
+            _employeeList.Clear();
+            _remarksList.Clear();
+        }
+
+        public static int GetRemarksCount()
+        {
+            return _remarksList.Count;
+        }
+
+        public IEnumerable<Employee> GetEmployeesWithRemarks()
+        {
+            return _employeeList.Where(emp => _remarksList.All(remark => remark.EmployeeId == emp.Id));
+        }
+
+
     }
 }

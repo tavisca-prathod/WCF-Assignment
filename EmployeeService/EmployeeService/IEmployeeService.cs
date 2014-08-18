@@ -16,10 +16,9 @@ namespace EmployeeService
         //Add Remarks
         [OperationContract]
         void AddRemarks(int employeeId, string remark);
-        //create employee
+        //Create employee
         [OperationContract]
         void CreateEmployee(int id, string name);
-        // TODO: Add your service operations here
     }
 
     [ServiceContract]
@@ -33,6 +32,7 @@ namespace EmployeeService
         [OperationContract]
         List<Employee> GetAllEmployees();
 
+        IEnumerable<Employee> GetEmployeesWithRemarks();
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
@@ -42,7 +42,7 @@ namespace EmployeeService
         [DataMember]
         public string Name { get; set; }
         [DataMember]
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 
     [DataContract]
