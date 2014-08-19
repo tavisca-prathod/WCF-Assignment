@@ -3,8 +3,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:49468/EmployeeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:49468/EmployeeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:49468/EmployeeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/EmployeeService" />
+      <xsd:import schemaLocation="http://localhost:49468/EmployeeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IAddEmployeeService_AddRemarks_InputMessage">
@@ -13,17 +13,35 @@
   <wsdl:message name="IAddEmployeeService_AddRemarks_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddRemarksResponse" />
   </wsdl:message>
+  <wsdl:message name="IAddEmployeeService_AddRemarks_EmployeeServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/EmployeeService" name="detail" element="q1:EmployeeServiceException" />
+  </wsdl:message>
   <wsdl:message name="IAddEmployeeService_CreateEmployee_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateEmployee" />
   </wsdl:message>
   <wsdl:message name="IAddEmployeeService_CreateEmployee_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateEmployeeResponse" />
   </wsdl:message>
-  <wsdl:message name="IGetEmployeeService_GetEmployeeDetails_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetEmployeeDetails" />
+  <wsdl:message name="IAddEmployeeService_CreateEmployee_EmployeeServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/EmployeeService" name="detail" element="q2:EmployeeServiceException" />
   </wsdl:message>
-  <wsdl:message name="IGetEmployeeService_GetEmployeeDetails_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetEmployeeDetailsResponse" />
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeDetailsById" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeDetailsByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsById_EmployeeServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/EmployeeService" name="detail" element="q3:EmployeeServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeDetailsByName" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeDetailsByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeDetailsByName_EmployeeServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/EmployeeService" name="detail" element="q4:EmployeeServiceException" />
   </wsdl:message>
   <wsdl:message name="IGetEmployeeService_GetAllEmployees_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllEmployees" />
@@ -31,24 +49,72 @@
   <wsdl:message name="IGetEmployeeService_GetAllEmployees_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllEmployeesResponse" />
   </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeesWithRemarks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeesWithRemarks" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeesWithRemarks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeesWithRemarksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_DeleteAllEMployees_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAllEMployees" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_DeleteAllEMployees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAllEMployeesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeCount" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetEmployeeCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetRemarksCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRemarksCount" />
+  </wsdl:message>
+  <wsdl:message name="IGetEmployeeService_GetRemarksCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRemarksCountResponse" />
+  </wsdl:message>
   <wsdl:portType name="IAddEmployeeService">
     <wsdl:operation name="AddRemarks">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddEmployeeService/AddRemarks" message="tns:IAddEmployeeService_AddRemarks_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddEmployeeService/AddRemarksResponse" message="tns:IAddEmployeeService_AddRemarks_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAddEmployeeService/AddRemarksEmployeeServiceExceptionFault" name="EmployeeServiceExceptionFault" message="tns:IAddEmployeeService_AddRemarks_EmployeeServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateEmployee">
       <wsdl:input wsaw:Action="http://tempuri.org/IAddEmployeeService/CreateEmployee" message="tns:IAddEmployeeService_CreateEmployee_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAddEmployeeService/CreateEmployeeResponse" message="tns:IAddEmployeeService_CreateEmployee_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAddEmployeeService/CreateEmployeeEmployeeServiceExceptionFault" name="EmployeeServiceExceptionFault" message="tns:IAddEmployeeService_CreateEmployee_EmployeeServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IGetEmployeeService">
-    <wsdl:operation name="GetEmployeeDetails">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetails" message="tns:IGetEmployeeService_GetEmployeeDetails_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsResponse" message="tns:IGetEmployeeService_GetEmployeeDetails_OutputMessage" />
+    <wsdl:operation name="GetEmployeeDetailsById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsById" message="tns:IGetEmployeeService_GetEmployeeDetailsById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByIdResponse" message="tns:IGetEmployeeService_GetEmployeeDetailsById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByIdEmployeeServiceExceptionFault" name="EmployeeServiceExceptionFault" message="tns:IGetEmployeeService_GetEmployeeDetailsById_EmployeeServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeDetailsByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByName" message="tns:IGetEmployeeService_GetEmployeeDetailsByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByNameResponse" message="tns:IGetEmployeeService_GetEmployeeDetailsByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByNameEmployeeServiceExceptionFault" name="EmployeeServiceExceptionFault" message="tns:IGetEmployeeService_GetEmployeeDetailsByName_EmployeeServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllEmployees">
       <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetAllEmployees" message="tns:IGetEmployeeService_GetAllEmployees_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetAllEmployeesResponse" message="tns:IGetEmployeeService_GetAllEmployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeesWithRemarks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarks" message="tns:IGetEmployeeService_GetEmployeesWithRemarks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarksResponse" message="tns:IGetEmployeeService_GetEmployeesWithRemarks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAllEMployees">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/DeleteAllEMployees" message="tns:IGetEmployeeService_DeleteAllEMployees_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/DeleteAllEMployeesResponse" message="tns:IGetEmployeeService_DeleteAllEMployees_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeCount" message="tns:IGetEmployeeService_GetEmployeeCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetEmployeeCountResponse" message="tns:IGetEmployeeService_GetEmployeeCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRemarksCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGetEmployeeService/GetRemarksCount" message="tns:IGetEmployeeService_GetRemarksCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGetEmployeeService/GetRemarksCountResponse" message="tns:IGetEmployeeService_GetRemarksCount_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IAddEmployeeService" type="tns:IAddEmployeeService">
@@ -61,6 +127,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="EmployeeServiceExceptionFault">
+        <soap:fault use="literal" name="EmployeeServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="CreateEmployee">
       <soap:operation soapAction="http://tempuri.org/IAddEmployeeService/CreateEmployee" style="document" />
@@ -70,12 +139,39 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="EmployeeServiceExceptionFault">
+        <soap:fault use="literal" name="EmployeeServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IGetEmployeeService" type="tns:IGetEmployeeService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetEmployeeDetails">
-      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetails" style="document" />
+    <wsdl:operation name="GetEmployeeDetailsById">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EmployeeServiceExceptionFault">
+        <soap:fault use="literal" name="EmployeeServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeDetailsByName">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EmployeeServiceExceptionFault">
+        <soap:fault use="literal" name="EmployeeServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEmployees">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetAllEmployees" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -83,8 +179,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllEmployees">
-      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetAllEmployees" style="document" />
+    <wsdl:operation name="GetEmployeesWithRemarks">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAllEMployees">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/DeleteAllEMployees" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeCount">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetEmployeeCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRemarksCount">
+      <soap:operation soapAction="http://tempuri.org/IGetEmployeeService/GetRemarksCount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

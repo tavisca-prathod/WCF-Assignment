@@ -6,3 +6,4 @@ D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeService
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.csprojResolveAssemblyReference.cache
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.dll
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.pdb
+D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeData.xml

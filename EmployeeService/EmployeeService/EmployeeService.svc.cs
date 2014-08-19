@@ -27,7 +27,7 @@ namespace EmployeeService
             }
             else
             {
-                throw new Exception("The employee with the given id does not exists");
+               throw new FaultException<EmployeeServiceException>(CreateException(101,"Employee With given id does not exists "+employeeId),"Exception Occured");
             }
         }
 
@@ -44,7 +44,7 @@ namespace EmployeeService
             }
             else
             {
-                throw new Exception("The employee with the given id already exists");
+                throw new FaultException<EmployeeServiceException>(CreateException(101, "The employee with the given id already exists " + id), "Exception Occured");
             }
         }
 
@@ -56,7 +56,7 @@ namespace EmployeeService
             }
             else
             {
-                throw new Exception("The employee with the given id does not exists");
+                throw new FaultException<EmployeeServiceException>(CreateException(101, "The employee with the given id does not exists " + employeeId), "Exception Occured");
             }
         }
 
@@ -68,7 +68,8 @@ namespace EmployeeService
             }
             else
             {
-                throw new Exception("The employee with the given name does not exists");
+                throw new FaultException<EmployeeServiceException>(CreateException(101, "The employee with the given name does not exists " + employeeName), "Exception Occured");
+                
             }
         }
 
@@ -87,18 +88,18 @@ namespace EmployeeService
             return _employeeList.Any(employee => employee.Name == employeeName);
         }
 
-        public static int GetEmployeeCount()
+        public int GetEmployeeCount()
         {
             return _employeeList.Count;
         }
 
-        public static void ClearEmployeeList()
+        public void DeleteAllEMployees()
         {
             _employeeList.Clear();
             _remarksList.Clear();
         }
 
-        public static int GetRemarksCount()
+        public int GetRemarksCount()
         {
             return _remarksList.Count;
         }
@@ -108,6 +109,14 @@ namespace EmployeeService
             return _employeeList.Where(emp => _remarksList.All(remark => remark.EmployeeId == emp.Id));
         }
 
+        private EmployeeServiceException CreateException(int faultId, string message) {
+            EmployeeServiceException exception = new EmployeeServiceException
+            {
+                FaultId = faultId,
+                Message = message
+            };
 
+            return exception;
+        }
     }
 }

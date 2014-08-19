@@ -1,5 +1,5 @@
 D:\WCF-Assignment\EmployeeService\EmployeeService\bin\EmployeeService.dll
 D:\WCF-Assignment\EmployeeService\EmployeeService\bin\EmployeeService.pdb
+D:\WCF-Assignment\EmployeeService\EmployeeService\obj\Debug\EmployeeService.csprojResolveAssemblyReference.cache
 D:\WCF-Assignment\EmployeeService\EmployeeService\obj\Debug\EmployeeService.dll
 D:\WCF-Assignment\EmployeeService\EmployeeService\obj\Debug\EmployeeService.pdb
-D:\WCF-Assignment\EmployeeService\EmployeeService\obj\Debug\EmployeeService.csprojResolveAssemblyReference.cache

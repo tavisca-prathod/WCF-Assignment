@@ -16,12 +16,15 @@ namespace EmployeeServiceTests.EmployeeTestServiceReference {
     public interface IAddEmployeeService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddEmployeeService/AddRemarks", ReplyAction="http://tempuri.org/IAddEmployeeService/AddRemarksResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(EmployeeService.EmployeeServiceException), Action="http://tempuri.org/IAddEmployeeService/AddRemarksEmployeeServiceExceptionFault", Name="EmployeeServiceException", Namespace="http://schemas.datacontract.org/2004/07/EmployeeService")]
         void AddRemarks(int employeeId, string remark);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddEmployeeService/AddRemarks", ReplyAction="http://tempuri.org/IAddEmployeeService/AddRemarksResponse")]
         System.Threading.Tasks.Task AddRemarksAsync(int employeeId, string remark);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddEmployeeService/CreateEmployee", ReplyAction="http://tempuri.org/IAddEmployeeService/CreateEmployeeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(EmployeeService.EmployeeServiceException), Action="http://tempuri.org/IAddEmployeeService/CreateEmployeeEmployeeServiceExceptionFaul" +
+            "t", Name="EmployeeServiceException", Namespace="http://schemas.datacontract.org/2004/07/EmployeeService")]
         void CreateEmployee(int id, string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAddEmployeeService/CreateEmployee", ReplyAction="http://tempuri.org/IAddEmployeeService/CreateEmployeeResponse")]
@@ -76,17 +79,51 @@ namespace EmployeeServiceTests.EmployeeTestServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EmployeeTestServiceReference.IGetEmployeeService")]
     public interface IGetEmployeeService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetails", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsResponse")]
-        EmployeeService.Employee GetEmployeeDetails(int employeeId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsById", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(EmployeeService.EmployeeServiceException), Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByIdEmployeeServiceExcep" +
+            "tionFault", Name="EmployeeServiceException", Namespace="http://schemas.datacontract.org/2004/07/EmployeeService")]
+        EmployeeService.Employee GetEmployeeDetailsById(int employeeId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetails", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsResponse")]
-        System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsAsync(int employeeId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsById", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByIdResponse")]
+        System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsByIdAsync(int employeeId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByName", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByNameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(EmployeeService.EmployeeServiceException), Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByNameEmployeeServiceExc" +
+            "eptionFault", Name="EmployeeServiceException", Namespace="http://schemas.datacontract.org/2004/07/EmployeeService")]
+        EmployeeService.Employee GetEmployeeDetailsByName(string employeeName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByName", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeDetailsByNameResponse")]
+        System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsByNameAsync(string employeeName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetAllEmployees", ReplyAction="http://tempuri.org/IGetEmployeeService/GetAllEmployeesResponse")]
         EmployeeService.Employee[] GetAllEmployees();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetAllEmployees", ReplyAction="http://tempuri.org/IGetEmployeeService/GetAllEmployeesResponse")]
         System.Threading.Tasks.Task<EmployeeService.Employee[]> GetAllEmployeesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarks", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarksResponse")]
+        EmployeeService.Employee[] GetEmployeesWithRemarks();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarks", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeesWithRemarksResponse")]
+        System.Threading.Tasks.Task<EmployeeService.Employee[]> GetEmployeesWithRemarksAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/DeleteAllEMployees", ReplyAction="http://tempuri.org/IGetEmployeeService/DeleteAllEMployeesResponse")]
+        void DeleteAllEMployees();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/DeleteAllEMployees", ReplyAction="http://tempuri.org/IGetEmployeeService/DeleteAllEMployeesResponse")]
+        System.Threading.Tasks.Task DeleteAllEMployeesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeCount", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeCountResponse")]
+        int GetEmployeeCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetEmployeeCount", ReplyAction="http://tempuri.org/IGetEmployeeService/GetEmployeeCountResponse")]
+        System.Threading.Tasks.Task<int> GetEmployeeCountAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetRemarksCount", ReplyAction="http://tempuri.org/IGetEmployeeService/GetRemarksCountResponse")]
+        int GetRemarksCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGetEmployeeService/GetRemarksCount", ReplyAction="http://tempuri.org/IGetEmployeeService/GetRemarksCountResponse")]
+        System.Threading.Tasks.Task<int> GetRemarksCountAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -116,12 +153,20 @@ namespace EmployeeServiceTests.EmployeeTestServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public EmployeeService.Employee GetEmployeeDetails(int employeeId) {
-            return base.Channel.GetEmployeeDetails(employeeId);
+        public EmployeeService.Employee GetEmployeeDetailsById(int employeeId) {
+            return base.Channel.GetEmployeeDetailsById(employeeId);
         }
         
-        public System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsAsync(int employeeId) {
-            return base.Channel.GetEmployeeDetailsAsync(employeeId);
+        public System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsByIdAsync(int employeeId) {
+            return base.Channel.GetEmployeeDetailsByIdAsync(employeeId);
+        }
+        
+        public EmployeeService.Employee GetEmployeeDetailsByName(string employeeName) {
+            return base.Channel.GetEmployeeDetailsByName(employeeName);
+        }
+        
+        public System.Threading.Tasks.Task<EmployeeService.Employee> GetEmployeeDetailsByNameAsync(string employeeName) {
+            return base.Channel.GetEmployeeDetailsByNameAsync(employeeName);
         }
         
         public EmployeeService.Employee[] GetAllEmployees() {
@@ -130,6 +175,38 @@ namespace EmployeeServiceTests.EmployeeTestServiceReference {
         
         public System.Threading.Tasks.Task<EmployeeService.Employee[]> GetAllEmployeesAsync() {
             return base.Channel.GetAllEmployeesAsync();
+        }
+        
+        public EmployeeService.Employee[] GetEmployeesWithRemarks() {
+            return base.Channel.GetEmployeesWithRemarks();
+        }
+        
+        public System.Threading.Tasks.Task<EmployeeService.Employee[]> GetEmployeesWithRemarksAsync() {
+            return base.Channel.GetEmployeesWithRemarksAsync();
+        }
+        
+        public void DeleteAllEMployees() {
+            base.Channel.DeleteAllEMployees();
+        }
+        
+        public System.Threading.Tasks.Task DeleteAllEMployeesAsync() {
+            return base.Channel.DeleteAllEMployeesAsync();
+        }
+        
+        public int GetEmployeeCount() {
+            return base.Channel.GetEmployeeCount();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetEmployeeCountAsync() {
+            return base.Channel.GetEmployeeCountAsync();
+        }
+        
+        public int GetRemarksCount() {
+            return base.Channel.GetRemarksCount();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetRemarksCountAsync() {
+            return base.Channel.GetRemarksCountAsync();
         }
     }
 }

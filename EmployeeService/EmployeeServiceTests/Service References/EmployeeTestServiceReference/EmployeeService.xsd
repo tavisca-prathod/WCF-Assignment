@@ -27,17 +27,31 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetEmployeeDetails">
+  <xs:element name="GetEmployeeDetailsById">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="employeeId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetEmployeeDetailsResponse">
+  <xs:element name="GetEmployeeDetailsByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetEmployeeDetailsResult" nillable="true" type="q1:Employee" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetEmployeeDetailsByIdResult" nillable="true" type="q1:Employee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeeDetailsByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="employeeName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeeDetailsByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetEmployeeDetailsByNameResult" nillable="true" type="q2:Employee" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -49,7 +63,53 @@
   <xs:element name="GetAllEmployeesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetAllEmployeesResult" nillable="true" type="q2:ArrayOfEmployee" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetAllEmployeesResult" nillable="true" type="q3:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeesWithRemarks">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeesWithRemarksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/EmployeeService" minOccurs="0" name="GetEmployeesWithRemarksResult" nillable="true" type="q4:ArrayOfEmployee" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAllEMployees">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAllEMployeesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeeCount">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEmployeeCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEmployeeCountResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRemarksCount">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRemarksCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRemarksCountResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

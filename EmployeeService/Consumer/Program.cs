@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Consumer.EmployeeServiceReference;
+using System.ServiceModel;
 
 namespace Consumer
 {
@@ -13,8 +14,13 @@ namespace Consumer
         {
             using(var addEmployeeServiceClient = new AddEmployeeServiceClient())
             using (var getEmployeeServiceClient = new GetEmployeeServiceClient()) {
-                addEmployeeServiceClient.CreateEmployee(7,"Prashant");
-                addEmployeeServiceClient.AddRemarks(7,"this is our employee");
+                try {
+                    addEmployeeServiceClient.CreateEmployee(-2,"Prashant");
+                }
+                catch (FaultException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }

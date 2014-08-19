@@ -15,24 +15,39 @@ namespace EmployeeService
 
         //Add Remarks
         [OperationContract]
+        [FaultContract(typeof(EmployeeServiceException))]
         void AddRemarks(int employeeId, string remark);
         //Create employee
         [OperationContract]
+        [FaultContract(typeof(EmployeeServiceException))]
         void CreateEmployee(int id, string name);
     }
 
     [ServiceContract]
     public interface IGetEmployeeService {
 
-        [OperationContract]
+        [OperationContract(Name = "GetEmployeeDetailsById")]
+        [FaultContract(typeof(EmployeeServiceException))]
         Employee GetEmployeeDetails(int employeeId);
 
+        [OperationContract(Name = "GetEmployeeDetailsByName")]
+        [FaultContract(typeof(EmployeeServiceException))]
         Employee GetEmployeeDetails(string employeeName);
 
         [OperationContract]
         List<Employee> GetAllEmployees();
 
+        [OperationContract]
         IEnumerable<Employee> GetEmployeesWithRemarks();
+
+        [OperationContract]
+        void DeleteAllEMployees();
+
+        [OperationContract]
+        int GetEmployeeCount();
+
+        [OperationContract]
+        int GetRemarksCount();
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
@@ -48,8 +63,21 @@ namespace EmployeeService
     [DataContract]
     public class Remarks
     {
+        [DataMember]
         public int EmployeeId { get; set; }
+        [DataMember]
         public DateTime DateTime { get; set; }
+        [DataMember]
         public string Remark { get; set; }
+    }
+
+    [DataContract]
+    public class EmployeeServiceException {
+
+        [DataMember]
+        public int FaultId { get; set; }
+
+        [DataMember]
+        public string Message { get; set; }
     }
 }
