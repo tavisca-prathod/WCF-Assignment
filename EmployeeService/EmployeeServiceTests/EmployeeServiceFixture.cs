@@ -12,13 +12,13 @@ namespace EmployeeServiceTests
     [TestClass]
     public class EmployeeServiceFixture
     {
-        private static int currentCount;
-        private int totalRowCount;
-        private TestContext testContextInstance;
+        private static int _currentCount;
+        private static int _totalRowCount;
+        private TestContext _testContextInstance;
         public TestContext TestContext
         {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
+            get { return _testContextInstance; }
+            set { _testContextInstance = value; }
         }
 
        
@@ -27,18 +27,18 @@ namespace EmployeeServiceTests
         {
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                if (totalRowCount == currentCount) {
+                if (_totalRowCount == _currentCount) {
                     getEmployeeService.DeleteAllEMployees();
-                    currentCount = 0;
-                    totalRowCount = 0;
+                    _currentCount = 0;
+                    _totalRowCount = 0;
                 }
             }
         }
 
         [TestMethod]
-        [DeploymentItem(@"D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\EmployeeData.xml")]
+        [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
-                           @"D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\EmployeeData.xml",
+                           @"EmployeeData.xml",
                            "Employee",
                             DataAccessMethod.Sequential)]
         public void AddEmployeeFixture()
@@ -46,12 +46,12 @@ namespace EmployeeServiceTests
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                currentCount++;
-                totalRowCount = testContextInstance.DataRow.Table.Rows.Count;
-                int employeeId = Int32.Parse((string)testContextInstance.DataRow["EmployeeId"]);
-                string employeeName = testContextInstance.DataRow["EmployeeName"].ToString();
+                _currentCount++;
+                _totalRowCount = _testContextInstance.DataRow.Table.Rows.Count;
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
                 addEmployeeService.CreateEmployee(employeeId, employeeName);
-                Assert.AreEqual(currentCount, getEmployeeService.GetEmployeeCount());
+                Assert.AreEqual(_currentCount, getEmployeeService.GetEmployeeCount());
                 Assert.AreEqual(employeeId, getEmployeeService.GetEmployeeDetailsById(employeeId).Id);
                 Assert.AreEqual(employeeName, getEmployeeService.GetEmployeeDetailsByName(employeeName).Name);
             }
@@ -59,22 +59,19 @@ namespace EmployeeServiceTests
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
-          [DeploymentItem(@"D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\EmployeeData.xml")]
+        [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
-                           @"D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\EmployeeData.xml",
-                           "Employee",
+                           @"EmployeeData.xml",
+                           "ExistingEmployee",
                             DataAccessMethod.Sequential)]
         public void AddEmployeeWithExistingIdFixture()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                int employeeId = Int32.Parse((string)testContextInstance.DataRow["EmployeeId"]);
-                string employeeName = testContextInstance.DataRow["EmployeeName"].ToString();
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
                 addEmployeeService.CreateEmployee(employeeId, employeeName);
-
-                employeeId = Int32.Parse((string)testContextInstance.DataRow["EmployeeId"]);
-                employeeName = testContextInstance.DataRow["EmployeeName"].ToString();
                 addEmployeeService.CreateEmployee(employeeId, employeeName);
                 Assert.AreEqual(1, getEmployeeService.GetEmployeeCount());
             }
@@ -82,51 +79,78 @@ namespace EmployeeServiceTests
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithOnlyName",
+                            DataAccessMethod.Sequential)]
         public void GetEmployeeWithNonExistingEmployeeName()
         {
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
                 Employee emp = null;
-                emp = getEmployeeService.GetEmployeeDetailsByName("Prashant");
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                emp = getEmployeeService.GetEmployeeDetailsByName(employeeName);
                 Assert.IsNull(emp);
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "NonExistingEmployee",
+                            DataAccessMethod.Sequential)]
         public void GetEmployeeWithNonExistingEmployeeId()
         {
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
                 Employee emp = null;
-                emp = getEmployeeService.GetEmployeeDetailsById(1);
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                emp = getEmployeeService.GetEmployeeDetailsById(employeeId);
                 Assert.IsNull(emp);
             }
         }
 
         [TestMethod]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "Employee",
+                            DataAccessMethod.Sequential)]
         public void GetAllEmployees()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                List<Employee> employeeList = getEmployeeService.GetAllEmployees().ToList();
-                Assert.AreEqual(employeeList.Count, 0);
-                addEmployeeService.CreateEmployee(1, "Prashant");
-                employeeList = getEmployeeService.GetAllEmployees().ToList();
-                Assert.AreEqual(employeeList.Count, 1);
+                _currentCount++;
+                _totalRowCount = _testContextInstance.DataRow.Table.Rows.Count;
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                addEmployeeService.CreateEmployee(employeeId, employeeName);
+                Assert.AreEqual(_currentCount, getEmployeeService.GetAllEmployees().Count());
             }
         }
 
         [TestMethod]
-        public void AddRemaekForAnExistingEmployee()
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithRemark",
+                            DataAccessMethod.Sequential)]
+        public void AddRemarkForAnExistingEmployee()
         {
 
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                addEmployeeService.CreateEmployee(1, "Prashant");
-                addEmployeeService.AddRemarks(1, "Hey There I am using watsapp");
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                string remarkText = _testContextInstance.DataRow["RemarkString"].ToString();
+
+                addEmployeeService.CreateEmployee(employeeId,employeeName);
+                addEmployeeService.AddRemarks(employeeId, remarkText);
                 Assert.AreEqual(1, getEmployeeService.GetEmployeeCount());
                 Assert.AreEqual(1, getEmployeeService.GetRemarksCount());
             }
@@ -134,12 +158,19 @@ namespace EmployeeServiceTests
 
         [TestMethod]
         [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "RemarkForNonExistingEmployee",
+                            DataAccessMethod.Sequential)]
         public void AddRemarkForNonExistingEmployee()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                addEmployeeService.AddRemarks(1, "Hey There I am using watsapp");
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string remarkText = _testContextInstance.DataRow["RemarkString"].ToString();
+                addEmployeeService.AddRemarks(employeeId, remarkText);
                 Assert.AreEqual(getEmployeeService.GetRemarksCount(), 0);
             }
         }
@@ -160,40 +191,66 @@ namespace EmployeeServiceTests
         }
 
         [TestMethod]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "Employee",
+                            DataAccessMethod.Sequential)]
         public void GetEmployeeWithIdAndName()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                addEmployeeService.CreateEmployee(1, "Prashant");
-                addEmployeeService.CreateEmployee(2, "Prash");
-                Employee emp = getEmployeeService.GetEmployeeDetailsById(1);
-                Assert.AreEqual(emp.Name, "Prashant");
-                Employee empWithId2 = getEmployeeService.GetEmployeeDetailsById(2);
-                Assert.AreEqual(empWithId2.Id, 2);
+                Debug.WriteLine("the count is 1"+_currentCount);
+
+                _currentCount++;
+                _totalRowCount = _testContextInstance.DataRow.Table.Rows.Count;
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                addEmployeeService.CreateEmployee(employeeId, employeeName);
+                Debug.WriteLine("the count is 2" + employeeId);
+                Debug.WriteLine("the count is 3" + employeeName);
+                
+                Assert.AreEqual(_currentCount, getEmployeeService.GetEmployeeCount());
+                Assert.AreEqual(employeeId, getEmployeeService.GetEmployeeDetailsById(employeeId).Id);
+                Assert.AreEqual(employeeName, getEmployeeService.GetEmployeeDetailsByName(employeeName).Name);
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithIncorrectName",
+                            DataAccessMethod.Sequential)]
         public void AddEmployeeWithInCorrectName()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                addEmployeeService.CreateEmployee(1, "Prashant56565");
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                addEmployeeService.CreateEmployee(employeeId, employeeName);
                 Assert.AreEqual(0, getEmployeeService.GetEmployeeCount());
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithIncorrectId",
+                            DataAccessMethod.Sequential)]
         public void AddEmployeeWithInCorrectId()
         {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                addEmployeeService.CreateEmployee(-1, "Prashant");
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                addEmployeeService.CreateEmployee(employeeId, employeeName);
                 Assert.AreEqual(0, getEmployeeService.GetEmployeeCount());
             }
         }
