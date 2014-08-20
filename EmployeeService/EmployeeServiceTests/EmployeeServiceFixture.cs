@@ -265,5 +265,61 @@ namespace EmployeeServiceTests
                 Assert.AreEqual(0, getEmployeeService.GetEmployeeCount());
             }
         }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "RemarkForEmployeeWithNegativeId",
+                            DataAccessMethod.Sequential)]
+        public void AddRemarkForEmployeeWithNegativeId() {
+            using (var addEmployeeService = new AddEmployeeServiceClient())
+            using (var getEmployeeService = new GetEmployeeServiceClient())
+            {
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string remark = _testContextInstance.DataRow["RemarkString"].ToString();
+                addEmployeeService.AddRemarks(employeeId, remark);
+                Assert.AreEqual(0, getEmployeeService.GetRemarksCount());
+            }
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmptyRemarkForEmployee",
+                            DataAccessMethod.Sequential)]
+        public void AddEmptyRemark() {
+            using (var addEmployeeService = new AddEmployeeServiceClient())
+            using (var getEmployeeService = new GetEmployeeServiceClient())
+            {
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string remark = _testContextInstance.DataRow["RemarkString"].ToString();
+                addEmployeeService.AddRemarks(employeeId, remark);
+                Assert.AreEqual(0, getEmployeeService.GetRemarksCount());
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithIncorrectRemark",
+                            DataAccessMethod.Sequential)]
+        public void AddInValidRemark() {
+            using (var addEmployeeService = new AddEmployeeServiceClient())
+            using (var getEmployeeService = new GetEmployeeServiceClient())
+            {
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string remark = _testContextInstance.DataRow["RemarkString"].ToString();
+                addEmployeeService.AddRemarks(employeeId, remark);
+                Assert.AreEqual(0, getEmployeeService.GetRemarksCount());
+            }
+        }
     }
 }
