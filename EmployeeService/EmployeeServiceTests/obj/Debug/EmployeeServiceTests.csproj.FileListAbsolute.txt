@@ -7,3 +7,12 @@ D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeService
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.dll
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.pdb
 D:\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeData.xml
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeData.xml
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.dll.config
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.dll
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeServiceTests.pdb
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeService.dll
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\bin\Debug\EmployeeService.pdb
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.csprojResolveAssemblyReference.cache
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.dll
+C:\Users\s\Desktop\WCF-Assignment\WCF-Assignment\EmployeeService\EmployeeServiceTests\obj\Debug\EmployeeServiceTests.pdb
