@@ -28,11 +28,19 @@ namespace EmployeeService
 
         private void ValidateStringInput(string param, string operationName)
         {
-            if (param != null)
+            if (param != null && param != "")
+            {
                 if (!Regex.IsMatch(
                     param, NameFormat))
+                {
                     throw new FaultException(
                         "Invalid name. Only alphabetical character");
+                }
+            }
+            else {
+                throw new FaultException(
+                        "Invalid name. Can not empty");
+            }
         }
 
         private void ValidateEmployeeId(int employeeId)

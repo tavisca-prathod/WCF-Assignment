@@ -39,4 +39,8 @@
     <EmployeeId>-3</EmployeeId>
     <EmployeeName>Prashant</EmployeeName>
   </EmployeeWithIncorrectId>
+  <EmployeeWithEmptyName>
+    <EmployeeId>1</EmployeeId>
+    <EmployeeName></EmployeeName>
+  </EmployeeWithEmptyName>
 </Employees>

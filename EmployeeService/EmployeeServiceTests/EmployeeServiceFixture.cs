@@ -19,9 +19,7 @@ namespace EmployeeServiceTests
         {
             get { return _testContextInstance; }
             set { _testContextInstance = value; }
-        }
-
-       
+        } 
         [TestInitialize]
         public void ClearData()
         {
@@ -201,16 +199,11 @@ namespace EmployeeServiceTests
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
-                Debug.WriteLine("the count is 1"+_currentCount);
-
-                _currentCount++;
+                 _currentCount++;
                 _totalRowCount = _testContextInstance.DataRow.Table.Rows.Count;
                 int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
                 string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
                 addEmployeeService.CreateEmployee(employeeId, employeeName);
-                Debug.WriteLine("the count is 2" + employeeId);
-                Debug.WriteLine("the count is 3" + employeeName);
-                
                 Assert.AreEqual(_currentCount, getEmployeeService.GetEmployeeCount());
                 Assert.AreEqual(employeeId, getEmployeeService.GetEmployeeDetailsById(employeeId).Id);
                 Assert.AreEqual(employeeName, getEmployeeService.GetEmployeeDetailsByName(employeeName).Name);
@@ -245,6 +238,24 @@ namespace EmployeeServiceTests
                             DataAccessMethod.Sequential)]
         public void AddEmployeeWithInCorrectId()
         {
+            using (var addEmployeeService = new AddEmployeeServiceClient())
+            using (var getEmployeeService = new GetEmployeeServiceClient())
+            {
+                int employeeId = Int32.Parse((string)_testContextInstance.DataRow["EmployeeId"]);
+                string employeeName = _testContextInstance.DataRow["EmployeeName"].ToString();
+                addEmployeeService.CreateEmployee(employeeId, employeeName);
+                Assert.AreEqual(0, getEmployeeService.GetEmployeeCount());
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        [DeploymentItem(@"EmployeeData.xml")]
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
+                           @"EmployeeData.xml",
+                           "EmployeeWithEmptyName",
+                            DataAccessMethod.Sequential)]
+        public void AddEmployeeWithEmptyName() {
             using (var addEmployeeService = new AddEmployeeServiceClient())
             using (var getEmployeeService = new GetEmployeeServiceClient())
             {
