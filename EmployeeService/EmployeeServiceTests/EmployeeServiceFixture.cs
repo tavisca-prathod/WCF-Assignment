@@ -211,7 +211,7 @@ namespace EmployeeServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",
@@ -230,7 +230,7 @@ namespace EmployeeServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",
@@ -249,7 +249,7 @@ namespace EmployeeServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",
@@ -268,7 +268,7 @@ namespace EmployeeServiceTests
 
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",
@@ -287,7 +287,7 @@ namespace EmployeeServiceTests
 
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",
@@ -305,7 +305,7 @@ namespace EmployeeServiceTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FaultException))]
+        [ExpectedException(typeof(FaultException<EmployeeServiceException>))]
         [DeploymentItem(@"EmployeeData.xml")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML",
                            @"EmployeeData.xml",

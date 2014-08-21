@@ -19,7 +19,7 @@ namespace EmployeeService
         public object BeforeCall(string operationName, object[] inputs)
         {
             if (operationName == "CreateEmployee" || operationName == "AddRemarks")
-            ValidateStringInput((string)inputs[1], operationName);
+                ValidateStringInput((string)inputs[1], operationName);
 
             if (operationName == "CreateEmployee" || operationName == "AddRemarks" || operationName == "GetEmployeeDetails")
                 ValidateEmployeeId((Int32)inputs[0]);
@@ -33,21 +33,30 @@ namespace EmployeeService
                 if (!Regex.IsMatch(
                     param, NameFormat))
                 {
-                    throw new FaultException(
-                        "Invalid name. Only alphabetical character");
+                    throw new FaultException<EmployeeServiceException>(CreateException(101, "Invalid name. Only alphabetical character"), "Exception Occured");
                 }
             }
-            else {
-                throw new FaultException(
-                        "Invalid name. Can not empty");
+            else
+            {
+                throw new FaultException<EmployeeServiceException>(CreateException(101, "Invalid name. Can not empty"), "Exception Occured");
             }
         }
 
         private void ValidateEmployeeId(int employeeId)
         {
             if (employeeId < 0)
-                throw new FaultException(
-                    "Invalid Id. Id should be greater than zero");
+                throw new FaultException<EmployeeServiceException>(CreateException(101, "Invalid Id. Id should be greater than zero"), "Exception Occured");
+        }
+
+        private EmployeeServiceException CreateException(int faultId, string message)
+        {
+            EmployeeServiceException exception = new EmployeeServiceException
+            {
+                FaultId = faultId,
+                Message = message
+            };
+
+            return exception;
         }
     }
 }
